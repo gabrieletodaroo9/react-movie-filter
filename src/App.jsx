@@ -24,7 +24,11 @@ function App() {
   ]
 
   // ARRAY CREATO PER I GENERI DEI FILM
-  const genreList = ["Tutti i generi", "Fantascienza", "Thriller", "Romantico", "Azione", "Commedia"]
+  const genreList = []
+  initialFilmsArray.forEach(film => {
+    if (!genreList.includes(film.genre))
+      genreList.push(film.genre)
+  })
 
   // VARIABILI DI STATO
   const [activeFilms, setActiveFilms] = useState(initialFilmsArray)
@@ -41,7 +45,7 @@ function App() {
     setActiveFilms(finalFilteredFilms)
   }, [activeGenre, search])
 
-  const genreListWithoutGeneral = genreList.filter(genre => genre !== "Tutti i generi")
+  const genreListWithGeneral = ["Tutti i generi", ...genreList]
   return (
     <>
       <header className='text-center mb-5'>
@@ -49,8 +53,8 @@ function App() {
       </header>
       <main>
         <div className="container">
-          <AddForm genreListWithoutGeneral={genreListWithoutGeneral} />
-          <FilteredForm genreList={genreList} activeGenre={activeGenre} setActiveGenre={setActiveGenre} search={search} setSearch={setSearch} />
+          <AddForm genreList={genreList} />
+          <FilteredForm genreListWithGeneral={genreListWithGeneral} activeGenre={activeGenre} setActiveGenre={setActiveGenre} search={search} setSearch={setSearch} />
           <FilteredList activeFilms={activeFilms} />
         </div>
       </main>
