@@ -14,23 +14,32 @@ function App() {
     { title: 'Batman', genre: 'Azione' },
     { title: 'Interstellar', genre: 'Fantascienza' },
     { title: 'Pulp Fiction', genre: 'Thriller' },
+    { title: 'La La Land', genre: 'Romantico' },
+    { title: 'Matrix', genre: 'Fantascienza' },
+    { title: 'Il Cavaliere Oscuro', genre: 'Azione' },
+    { title: 'Quasi Amici', genre: 'Commedia' },
+    { title: 'Fight Club', genre: 'Thriller' },
+    { title: 'Inside Out', genre: 'Commedia' }
   ]
 
   // ARRAY CREATO PER I GENERI DEI FILM
-  const genreList = ["Tutti i generi", "Fantascienza", "Thriller", "Romantico", "Azione"]
+  const genreList = ["Tutti i generi", "Fantascienza", "Thriller", "Romantico", "Azione", "Commedia"]
 
   // VARIABILI DI STATO
   const [activeFilms, setActiveFilms] = useState(initialFilmsArray)
   const [activeGenre, setActiveGenre] = useState("Tutti i generi")
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
-    if (activeGenre === "Tutti i generi") {
-      setActiveFilms(initialFilmsArray)
-      return
+
+    let currentFilms = initialFilmsArray;
+    if (activeGenre !== "Tutti i generi") {
+      currentFilms = currentFilms.filter(film => film.genre === activeGenre)
     }
-    const filteredFilms = initialFilmsArray.filter(film => film.genre === activeGenre)
-    setActiveFilms(filteredFilms)
-  }, [activeGenre])
+    const finalFilteredFilms = currentFilms.filter(film => film.title.toLowerCase().includes(search.toLowerCase()))
+    setActiveFilms(finalFilteredFilms)
+  }, [activeGenre, search])
+
 
   return (
     <>
@@ -39,7 +48,7 @@ function App() {
       </header>
       <main>
         <div className="container">
-          <Form genreList={genreList} activeGenre={activeGenre} setActiveGenre={setActiveGenre} />
+          <Form genreList={genreList} activeGenre={activeGenre} setActiveGenre={setActiveGenre} search={search} setSearch={setSearch} />
           <FilteredList activeFilms={activeFilms} />
         </div>
       </main>

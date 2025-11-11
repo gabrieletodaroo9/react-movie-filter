@@ -1,7 +1,7 @@
 export default function FilteredList({ activeFilms }) {
     return (
         <>
-            <div className="card mt-3">
+            <div className="card my-4">
                 <div className="card-header">
                     <h1>Filtered Films</h1>
                 </div>
