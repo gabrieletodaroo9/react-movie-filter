@@ -1,6 +1,7 @@
-export default function Form({ setActiveGenre, activeGenre, genreList, search, setSearch }) {
+export default function FilterForm({ setActiveGenre, activeGenre, genreList, search, setSearch }) {
     return (
-        <div className="card">
+        <div className="card mt-3">
+            <h3 className="pt-3 ps-3 fw-bold">Find Films</h3>
             <form onSubmit={e => e.preventDefault()} className="form-inline p-3" >
                 <label className="my-1 me-3" htmlFor="genreSelect">Genre:</label>
                 <select value={activeGenre} className="custom-select my-1 mr-sm-2 p-2" id="genreSelect" onChange={e => (setActiveGenre(e.target.value))} >

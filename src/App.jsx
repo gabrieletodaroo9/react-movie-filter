@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import FilteredList from './components/FilteredList'
-import Form from './components/Form'
+import FilteredForm from './components/FilterForm'
+import AddForm from './components/AddForm'
 import './App.css'
 
 function App() {
@@ -40,7 +41,7 @@ function App() {
     setActiveFilms(finalFilteredFilms)
   }, [activeGenre, search])
 
-
+  const genreListWithoutGeneral = genreList.filter(genre => genre !== "Tutti i generi")
   return (
     <>
       <header className='text-center mb-5'>
@@ -48,7 +49,8 @@ function App() {
       </header>
       <main>
         <div className="container">
-          <Form genreList={genreList} activeGenre={activeGenre} setActiveGenre={setActiveGenre} search={search} setSearch={setSearch} />
+          <AddForm genreListWithoutGeneral={genreListWithoutGeneral} />
+          <FilteredForm genreList={genreList} activeGenre={activeGenre} setActiveGenre={setActiveGenre} search={search} setSearch={setSearch} />
           <FilteredList activeFilms={activeFilms} />
         </div>
       </main>

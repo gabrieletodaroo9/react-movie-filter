@@ -3,7 +3,7 @@ export default function FilteredList({ activeFilms }) {
         <>
             <div className="card my-4">
                 <div className="card-header">
-                    <h1>Filtered Films</h1>
+                    <h3 className="text-center fw-bold">Films List</h3>
                 </div>
                 <ul className="list-group list-group-flush">
                     {
