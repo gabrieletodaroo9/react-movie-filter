@@ -5,6 +5,7 @@ import './App.css'
 
 function App() {
 
+
   // ARRAY INIZIALE DEI FILM
   const initialFilmsArray = [
     { title: 'Inception', genre: 'Fantascienza' },
@@ -14,13 +15,23 @@ function App() {
     { title: 'Interstellar', genre: 'Fantascienza' },
     { title: 'Pulp Fiction', genre: 'Thriller' },
   ]
-  // ARRAY CREATO PER I GENERI DEI FILM
 
-  const genreList = ["Fantascienza", "Thriller", "Romantico", "Azione"]
+  // ARRAY CREATO PER I GENERI DEI FILM
+  const genreList = ["Tutti i generi", "Fantascienza", "Thriller", "Romantico", "Azione"]
 
   // VARIABILI DI STATO
   const [activeFilms, setActiveFilms] = useState(initialFilmsArray)
-  const [activeGenre, setActiveGenre] = useState("tutti i generi")
+  const [activeGenre, setActiveGenre] = useState("Tutti i generi")
+
+  useEffect(() => {
+    if (activeGenre === "Tutti i generi") {
+      setActiveFilms(initialFilmsArray)
+      return
+    }
+    const filteredFilms = initialFilmsArray.filter(film => film.genre === activeGenre)
+    setActiveFilms(filteredFilms)
+  }, [activeGenre])
+
   return (
     <>
       <header className='text-center mb-5'>
@@ -29,7 +40,7 @@ function App() {
       <main>
         <div className="container">
           <Form genreList={genreList} activeGenre={activeGenre} setActiveGenre={setActiveGenre} />
-          <FilteredList initialFilmsArray={initialFilmsArray} activeFilms={activeFilms} />
+          <FilteredList activeFilms={activeFilms} />
         </div>
       </main>
     </>

@@ -1,4 +1,4 @@
-export default function FilteredList({ initialFilmsArray, activeFilms }) {
+export default function FilteredList({ activeFilms }) {
     return (
         <>
             <div className="card mt-3">
@@ -7,7 +7,7 @@ export default function FilteredList({ initialFilmsArray, activeFilms }) {
                 </div>
                 <ul className="list-group list-group-flush">
                     {
-                        initialFilmsArray.map(film => (
+                        activeFilms.map(film => (
                             <li key={film.title.trim().toLowerCase()} className="list-group-item">
                                 <p>{film.title}</p>
                             </li>
